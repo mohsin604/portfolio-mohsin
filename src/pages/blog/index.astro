@@ -9,24 +9,238 @@ posts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog - Mohsin Shahid</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/bootstrap.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* NAV */
+    .blog-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      border-bottom: 1px solid #1a1a1a;
+      position: sticky;
+      top: 0;
+      background: #0d0d0d;
+      z-index: 100;
+    }
+    .blog-nav .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #45E77B;
+      text-decoration: none;
+    }
+    .blog-nav .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .blog-nav .nav-links a:hover { opacity: 1; color: #45E77B; }
+
+    /* HERO */
+    .blog-hero {
+      padding: 80px 60px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .blog-hero-left h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .blog-hero-left p {
+      font-size: 16px;
+      opacity: 0.6;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+    .blog-hero-right {
+      display: grid;
+      grid-template-columns: repeat(4, 28px);
+      grid-template-rows: repeat(4, 28px);
+      gap: 6px;
+    }
+    .blog-hero-right span {
+      border-radius: 4px;
+      background: #45E77B;
+      opacity: 0.15;
+    }
+    .blog-hero-right span:nth-child(2),
+    .blog-hero-right span:nth-child(5),
+    .blog-hero-right span:nth-child(8) { opacity: 0.4; }
+    .blog-hero-right span:nth-child(3),
+    .blog-hero-right span:nth-child(6) { opacity: 0.7; }
+    .blog-hero-right span:nth-child(4) { opacity: 1; background: #45E77B; }
+
+    /* GRID */
+    .blog-grid-section {
+      padding: 20px 60px 80px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* CARD */
+    .blog-card {
+      background: #111111;
+      border: 1px solid #1e1e1e;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .blog-card:hover {
+      border-color: #45E77B;
+      transform: translateY(-4px);
+    }
+    .card-top {
+      padding: 20px 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .part-badge {
+      background: #45E77B;
+      color: #0d0d0d;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .card-body {
+      padding: 16px 20px;
+    }
+    .card-body h2 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .card-meta {
+      font-size: 12px;
+      opacity: 0.4;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .card-img-wrap {
+      margin: 0 20px 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1a1a1a;
+      height: 180px;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    /* FOOTER */
+    .blog-footer {
+      background: #111111;
+      border-top: 1px solid #1e1e1e;
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .blog-footer p { opacity: 0.4; font-size: 14px; }
+    .blog-footer a { color: #45E77B; text-decoration: none; font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .blog-nav { padding: 20px 24px; }
+      .blog-hero { padding: 60px 24px 40px; flex-direction: column; gap: 40px; }
+      .blog-hero-left h1 { font-size: 36px; }
+      .blog-grid-section { padding: 20px 24px 60px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-footer { padding: 30px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  <section style="padding: 100px 20px; max-width: 1200px; margin: 0 auto;">
-    <h1>Blog</h1>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
-      {posts.map(post => (
-        <div style="border: 1px solid #333; border-radius: 10px; overflow: hidden;">
-          <img src={post.data.featuredImage} alt={post.data.title} style="width: 100%; height: 200px; object-fit: cover;" />
-          <div style="padding: 20px;">
-            <span style="color: #f5a623; font-size: 12px; text-transform: uppercase;">{post.data.category}</span>
-            <h2 style="font-size: 18px; margin: 10px 0;">{post.data.title}</h2>
-            <p style="font-size: 14px; opacity: 0.7;">{post.data.excerpt}</p>
-            <a href={`/blog/${post.id.replace(/\.md$/, '')}`} style="display: inline-block; margin-top: 15px; color: #f5a623;">Read More →</a>
+
+  <!-- NAV -->
+  <nav class="blog-nav">
+    <a href="/" class="logo">Mohsin Shahid</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#services">Services</a>
+      <a href="/#portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <div class="blog-hero-left">
+      <h1>Blog & <span style="color:#45E77B">Insights</span></h1>
+      <p>WordPress, PHP, Shopify tips and web development guides from real project experience.</p>
+    </div>
+    <div class="blog-hero-right">
+      {Array.from({length: 16}).map((_, i) => <span></span>)}
+    </div>
+  </section>
+
+  <!-- BLOG GRID -->
+  <section class="blog-grid-section">
+    <div class="blog-grid">
+      {posts.map((post, index) => (
+        <a href={`/blog/${post.id.replace(/\.md$/, '')}`} class="blog-card">
+          <div class="card-top">
+            <span class="part-badge">Part {index + 1}</span>
+            <span style="font-size:12px; opacity:0.4;">{post.data.category}</span>
           </div>
-        </div>
+          <div class="card-body">
+            <h2>{post.data.title}</h2>
+            <div class="card-meta">
+              {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} · {post.data.category}
+            </div>
+          </div>
+          <div class="card-img-wrap">
+            {post.data.featuredImage
+              ? <img src={post.data.featuredImage} alt={post.data.title} />
+              : <div class="card-img-placeholder">📝</div>
+            }
+          </div>
+        </a>
       ))}
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer class="blog-footer">
+    <p>© 2026 Mohsin Shahid. All rights reserved.</p>
+    <a href="/">← Back to Portfolio</a>
+  </footer>
+
 </body>
 </html>
